@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+
+  node:
+    image: node:lts-alpine
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: npm run dev
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:4
+    ports:
+      - 27017:27017
+    volumes:
+      - dbdata:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: hardpass
+      MONGO_INITDB_DATABASE: defaultdb
+
+volumes:
+  dbdata:
