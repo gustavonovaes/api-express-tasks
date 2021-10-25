@@ -24,7 +24,7 @@ app.use(jwtServiceFactory({
 app.use(mongooseServiceFactory({
   uri: process.env.MONGODB_URL,
   timeout: process.env.MONGODB_TIMEOUT,
-  schemas
+  schemas,
 }));
 
 app.use(routes);

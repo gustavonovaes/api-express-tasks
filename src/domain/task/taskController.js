@@ -42,7 +42,7 @@ const taskController = {
     }
 
     return res.status(204).json({ task });
-  }
+  },
 };
 
 module.exports = taskController;

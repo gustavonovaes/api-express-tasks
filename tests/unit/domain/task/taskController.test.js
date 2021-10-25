@@ -19,16 +19,15 @@ describe('Task', () => {
     expect(res.json).toHaveBeenCalledWith({ tasks: mockTasks });
   });
 
-
   it('taskController.find', async () => {
     const req = mockRequest();
     req.$models = {
       Task: {
         findById: jest.fn().mockReturnValue(true),
       },
-    }
+    };
     req.params = {
-      id: 42
+      id: 42,
     };
 
     const res = mockResponse();
@@ -48,8 +47,8 @@ describe('Task', () => {
     const req = mockRequest();
     req.$models = {
       Task: {
-        create: jest.fn().mockReturnValue(task)
-      }
+        create: jest.fn().mockReturnValue(task),
+      },
     };
     const res = mockResponse();
 

@@ -1,4 +1,4 @@
-const ApiError = require("../support/apiError");
+const ApiError = require('../support/apiError');
 
 const jwtHeader = 'x-access-token';
 const key = '$user';
@@ -9,7 +9,7 @@ const jwtMiddleware = (req, _, next) => {
     return next(new ApiError(`No token provided at header '${jwtHeader}'`, 401));
   }
 
-  req.$jwt.verify(token)
+  return req.$jwt.verify(token)
     .then((user) => {
       req[key] = user;
       next();

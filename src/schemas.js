@@ -1,4 +1,7 @@
+const Task = require('./domain/task/taskSchema');
+const User = require('./domain/user/userSchema');
+
 module.exports = {
-  Task: require('./domain/task/taskSchema'),
-  User: require('./domain/user/userSchema'),
-}
+  Task,
+  User,
+};

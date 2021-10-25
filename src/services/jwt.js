@@ -2,24 +2,20 @@ const jwt = require('jsonwebtoken');
 
 function buildJwtFactory({ secret, expireTime }) {
   return {
-    verify: (token) => {
-      return new Promise((resolve, reject) => {
-        jwt.verify(token, secret, (err, decoded) => {
-          if (err) {
-            return reject(err);
-          }
+    verify: (token) => new Promise((resolve, reject) => {
+      jwt.verify(token, secret, (err, decoded) => {
+        if (err) {
+          return reject(err);
+        }
 
-          resolve(decoded);
-        });
-      })
-    },
-
-    sign: (data) => {
-      return jwt.sign(data, secret, {
-        expiresIn: expireTime
+        return resolve(decoded);
       });
-    }
-  }
+    }),
+
+    sign: (data) => jwt.sign(data, secret, {
+      expiresIn: expireTime,
+    }),
+  };
 }
 
 const jwtServiceFactory = ({ secret, expireTime }) => (req, _, next) => {
@@ -34,12 +30,12 @@ const jwtServiceFactory = ({ secret, expireTime }) => (req, _, next) => {
       $cache = buildJwtFactory({ secret, expireTime });
 
       return $cache;
-    }
+    },
   });
 
   next();
 };
 
 module.exports = {
-  jwtServiceFactory
-}
+  jwtServiceFactory,
+};

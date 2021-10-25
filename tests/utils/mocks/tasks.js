@@ -1,6 +1,6 @@
 module.exports = [
   {
-    name: "Task A",
-    completed: false
-  }
+    name: 'Task A',
+    completed: false,
+  },
 ];

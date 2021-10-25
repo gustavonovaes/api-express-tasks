@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 
-const ApiError = require("../../support/apiError");
+const ApiError = require('../../support/apiError');
 
 const sessionController = {
   async create(req, res) {
@@ -18,14 +18,14 @@ const sessionController = {
     const payload = {
       user: {
         id: user._id,
-        name: user.name
-      }
+        name: user.name,
+      },
     };
 
     const token = req.$jwt.sign(payload);
 
     res.status(200).json({ token });
-  }
-}
+  },
+};
 
 module.exports = sessionController;
