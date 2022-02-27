@@ -3,8 +3,9 @@ const mongoose = require('mongoose');
 // Returns the document with the update applied
 mongoose.set('returnOriginal', false);
 
-function defineModels(conn, schemas) {
+function defineSchemaModels(conn, schemas) {
   return Object.keys(schemas).reduce((models, name) => {
+    // eslint-disable-next-line no-param-reassign
     models[name] = conn.model(name, schemas[name]);
     return models;
   }, {});
@@ -26,7 +27,7 @@ const mongooseServiceFactory = ({ uri, timeout, schemas }) => (req, _, next) => 
         socketTimeoutMS: timeout,
       });
 
-      $cache = defineModels(conn, schemas);
+      $cache = defineSchemaModels(conn, schemas);
 
       return $cache;
     },

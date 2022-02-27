@@ -41,7 +41,7 @@ const taskController = {
       throw ApiError.create(`Can not find task for id ${id}`, 404);
     }
 
-    return res.status(204).json({ task });
+    res.status(204).json({ task });
   },
 };
 

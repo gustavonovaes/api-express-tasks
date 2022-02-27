@@ -1,14 +1,14 @@
 require('dotenv').config();
 
-const app = require('./src/app');
+const server = require('./src/server');
 
-app.listen(process.env.PORT || 3000, () => {
+server.listen(process.env.PORT || 3000, () => {
   console.log('Server listening...');
 });
 
 const exitHandler = () => {
-  if (app) {
-    return app.close(() => {
+  if (server) {
+    return server.close(() => {
       process.exit(1);
     });
   }
@@ -24,7 +24,7 @@ process.on('uncaughtException', unexpectedErrorHandler);
 process.on('unhandledRejection', unexpectedErrorHandler);
 
 process.on('SIGTERM', () => {
-  if (app) {
-    app.close();
+  if (server) {
+    server.close();
   }
 });

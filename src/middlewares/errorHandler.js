@@ -2,7 +2,7 @@ const { TokenExpiredError } = require('jsonwebtoken');
 
 const ApiError = require('../support/apiError');
 
-const errorHandler = (error, req, res, next) => {
+const errorHandler = (error, req, res, _next) => {
   if (error instanceof ApiError) {
     return res.status(error.statusCode).json({
       message: error.message,
